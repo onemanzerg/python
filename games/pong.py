@@ -37,6 +37,7 @@ ball.dx = 2
 ball.dy = 2
 
 # Табло очков
+
 pen = turtle.Turtle()
 pen.speed(0)
 pen.shape("square")
@@ -53,23 +54,35 @@ score_b = 0
 
 def rocket_a_up():
     y = rocket_a.ycor()
-    y += 20
-    rocket_a.sety(y)
+    if y > 245:
+        y = 245
+    else:
+        y += 20
+        rocket_a.sety(y)
 
 def rocket_a_down():
     y = rocket_a.ycor()
-    y -= 20
-    rocket_a.sety(y)
+    if y < -230:
+        y = -230
+    else:
+        y -= 20
+        rocket_a.sety(y)
 
 def rocket_b_up():
     y = rocket_b.ycor()
-    y += 20
-    rocket_b.sety(y)
+    if y > 240:
+        y = 240
+    else:
+        y += 20
+        rocket_b.sety(y)
 
 def rocket_b_down():
     y = rocket_b.ycor()
-    y -= 20
-    rocket_b.sety(y)
+    if y < -230:
+        y = -230
+    else:
+        y -= 20
+        rocket_b.sety(y)
 
 # Биндим движение ракеток на клавиатуру
 
@@ -79,10 +92,13 @@ win.onkeypress(rocket_a_down, "s")
 win.onkeypress(rocket_b_up, "Up")
 win.onkeypress(rocket_b_down, "Down")
 
+# Запускаем цикл игры
+
 while True:
     win.update()
 
-    # Move the ball
+    # Движение мячика
+
     ball.setx(ball.xcor() + ball.dx)
     ball.sety(ball.ycor() + ball.dy)
 
@@ -94,7 +110,7 @@ while True:
         ball.sety(-290)
         ball.dy *= -1
 
-    # Вариант отбивания от стенок бесконечное
+    # Отбивание от стенок и изменение табло
 
     if ball.xcor() > 390:
         ball.setx(390)
